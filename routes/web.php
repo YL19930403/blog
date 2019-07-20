@@ -196,3 +196,10 @@ Route::get('blade', function(){
 });
 
 
+//tcpdf调用
+Route::any('user/tcpdf/{id}', 'UserController@downloadPdf');
+
+
+
+
+

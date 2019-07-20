@@ -8,6 +8,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Comment;
 use App\Http\Services\KafkaService;
 use App\Notifications\InvoicePaid;
 use Illuminate\Database\Eloquent\Model;
@@ -24,6 +25,7 @@ use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Support\Facades\Storage;
 use App\Notice;
 use App\User;
+use TCPDF;
 
 
 // Kafka
@@ -329,5 +331,47 @@ class UserController extends BaseController{
         echo 'aaa';die;
     }
 
+
+
+    //获取PDF
+    public function downloadPdf(Request $request, int $id)
+    {
+        $comments = Comment::where('id', $id)->get();
+//        print_r($comments->toArray());
+//        print_r(compact('comments'));  // 转为对象 'comments' => []
+
+    }
+
+    public function getWareAddress($address)
+    {
+        if (strlen($address) < 80) {
+            return <<<Eof
+        <td rowspan="2" colspan="2" style="font-size: 16px;width: 455px;line-height:60px;">{$address}</td>
+Eof;
+        } else {
+            return <<<Eof
+        <td rowspan="2" colspan="2" style="font-size: 16px;width: 455px;">{$address}</td>
+Eof;
+        }
+    }
+
+
+    public function getWareDetail($outWareDetail)
+    {
+        $temp = [];
+        $goods = ['苹果','小米'];
+        $attrs = ['红色','钢化玻璃'];
+        for ($i=0; $i<2; $i++){
+            $temp[$i] = [
+                'key_num'    => $i++,
+                'goods_name' => $goods[$i],
+                'attr_name' => $attrs[$i],
+                'goods_unit' => '无',
+            ];
+        }
+    }
+
 }
+
+
 

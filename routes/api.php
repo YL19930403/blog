@@ -72,3 +72,6 @@ Route::get('home',function (){
 
 Route::post('swoole/index', 'SwooleController@index');
 
+//订单定时取消
+Route::post('order/submit', 'OrderController@submit');
+Route::put('order/cancel', 'OrderController@cancel');
