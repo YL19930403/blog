@@ -17,6 +17,7 @@
         "nmred/kafka-php": "v0.2.0.8",
         "predis/predis": "^1.1",
         "swooletw/laravel-swoole": "^2.6",
+        "tamayo/laravel-scout-elastic": "^5.0",
         "tecnickcom/tcpdf": "^6.2",
         "workerman/gateway-worker": "^3.0",
         "workerman/gatewayclient": "^3.0",
