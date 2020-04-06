@@ -89,7 +89,7 @@ return [
     ],
 
     'elasticsearch' => [
-        'index' => env('ELASTICSEARCH_INDEX', 'video'), //laravel , video/video
+        'index' => env('ELASTICSEARCH_INDEX', 'school'), //laravel , video/video
         'hosts' =>  [
             env('ELASTICSEARCH_HOST', 'http://127.0.0.1:9200')
         ],

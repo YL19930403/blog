@@ -15,6 +15,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Log;
+// Facade 其实是一个容器中类的静态代理，他可以让你以静态的方式来调用存放在容器中任何对象的任何方法
 use Illuminate\Support\Facades\Redis;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
@@ -26,6 +27,7 @@ use Illuminate\Support\Facades\Storage;
 use App\Notice;
 use App\User;
 use TCPDF;
+use Illuminate\Redis\RedisServiceProvider;
 
 
 // Kafka
@@ -62,7 +64,7 @@ class UserController extends BaseController{
 
     public function show(Request $request ,$id){
 
-//        url : http://localhost:8080/user8/3?token=wudy.1993yu
+//        url : wudy.laravel.cn:8082/user8/3?token=wudy.1993yu
 //        return view('user.profile', ['user'=>User::findOrFail($id)]);
 //        return $id.'控制器中间件';
         //从 Session 中获取数据的时候，还可以传递默认值作为第二个参数到 get 方法
@@ -72,7 +74,7 @@ class UserController extends BaseController{
 //        });
 
 
-//        Redis::set('foo', 2);
+//        Redis::set('foo', 20);
 //        echo Redis::get('foo');
 
         //redis
@@ -82,7 +84,7 @@ class UserController extends BaseController{
 
         //使用 ? 占位符代表参数绑定
 //        $notice = DB::select('select * from t_notice where status=?',[1]);
-        //命名绑定
+//        //命名绑定
 //        $notice = DB::select('select * from t_notice where status = :status', ['status'=>1]) ;
 //        var_dump($notice);die;
 
@@ -370,6 +372,14 @@ Eof;
             ];
         }
     }
+
+    // 门面facades
+    public function showFacadeProfile($id)
+    {
+        $user = Cache::get('user:' . $id);
+        return view('profile', ['user' => $user]);
+    }
+
 
 }
 

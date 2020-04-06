@@ -43,7 +43,6 @@ class ESinit extends Command
         $url = config('scout.elasticsearch.hosts')[0] .'/'.config('scout.elasticsearch.index');
         $client->delete($url);
 
-
 //        $client->post($url, [
 //            \GuzzleHttp\RequestOptions::JSON => [
 //                'settings' => [

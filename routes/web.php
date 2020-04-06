@@ -188,7 +188,7 @@ Route::get('/user/callback','UserController@thirdCallBack')->name('third');
 Route::get('user/sendnoti','UserController@sendNoti')->name('noti') ;
 
 //
-Route::get('user22/profile','UserController@show');
+Route::get('user22/profile','UserController@show2');
 
 //页面布局:http://wudy.laravel.cn:8088/blade
 Route::get('blade', function(){

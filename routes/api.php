@@ -32,7 +32,7 @@ Route::post('file/upload',function (\Illuminate\http\Request $request){
     if($request->hasFile('photo') && $request->file('photo')->isValid()){
         $photo = $request->file('photo');
         $extension = $photo->extension();
-        $store_result = $photo->storeAs('photo','test.jpg');
+        $store_result = $photo->storeAs('photo','test2.jpg');
         $output = [
             'extension' => $extension,
             'store_result' => $store_result
@@ -48,7 +48,7 @@ Route::get('download/response',function (){
     return response()->download(storage_path('app/photo/test.jpg'),'测试图片') ;
 });
 
-//文件响应：非下载，俄日是直接在浏览器显示文件(图片)
+//文件响应：非下载，我是直接在浏览器显示文件(图片)
 Route::get('file/response',function (){
    return response()->file(storage_path('app/photo/test.jpg')) ;
 });
@@ -75,3 +75,7 @@ Route::post('swoole/index', 'SwooleController@index');
 //订单定时取消
 Route::post('order/submit', 'OrderController@submit');
 Route::put('order/cancel', 'OrderController@cancel');
+
+//ES
+Route::get('es/index', 'ESController@index');
+Route::get('es/add', 'ESController@add');

@@ -68,6 +68,9 @@ return [
     |
     */
 
+    // providers 数组让我们可以配置一个提供者,每个提供者可以选择不同的 driver
+    // driver可以选择eloquent 或者 database
+    // 对应的驱动之后选择对应的配置项,eloquent:model,database:table
     'providers' => [
         'users' => [
             'driver' => 'eloquent',
@@ -81,7 +84,7 @@ return [
 
         'admins'=>[
             'driver'=>'eloquent',
-            'model'=> App\Admin::class,
+            'model'=> App\Video::class,
         ],
     ],
 
