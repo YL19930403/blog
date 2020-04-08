@@ -21,7 +21,8 @@ Route::get('hello',function() {
 
 Route::get('/user','UserController@index');
 
-
+//注册一个路由响应多种 HTTP 请求动作
+// 需要在中间件 Http/MiddleWare/verifyCsrfToken.php 处理 foo
 Route::match(['get','post'],'foo',function (){
     return 'This is a request from get or post';
 });
@@ -59,6 +60,16 @@ Route::get('user/profile',function (){
 
 //为控制器指定路由名称
 Route::get('user/profile','UserController@showProfile')->name('profile');
+
+
+// 路由前缀
+//Route::prefix('admin')->group(function (){
+//   Route::get('users', function (){
+//       return '路由前缀';
+//   });
+//
+//    Route::post('/postdriver/{id}', 'UserController@driver');
+//});
 
 
 //为命名路由生成 URL
@@ -113,9 +124,17 @@ Route::post('hello_from_form', function (){
 Route::get('user8/{id}','UserController@show' );
 
 //资源路由
-Route::resource('posts', 'PostController',['only' =>
-    ['index','show','store','edit']
+Route::resource('posts', 'PostController',[
+    'only' => ['index','show','store','edit', 'transfer', 'destroy', 'update'],  //指定控制器处理的部分行为
 ]);
+
+
+
+// wudy.laravel.cn:8082/posts
+//Route::resource('posts', 'PostController');
+
+
+
 
 //命名资源路由
 //默认情况下，所有资源控制器动作都有一个路由名称，不过，我们可以通过传入 names 数组来覆盖这些默认的名称
@@ -200,6 +219,37 @@ Route::get('blade', function(){
 Route::any('user/tcpdf/{id}', 'UserController@downloadPdf');
 
 
+
+
+// response篇 : http://wudy.laravel.cn:8082/testResponse
+Route::get('testResponse', function (){
+    $content = 'hellow Laravel!';
+    $status = 200;
+    $value = 'text/html;charset=utf-8';
+    // 助手函数
+    return response($content, $status)->header('Content-Type', $value)
+        ->withCookie('site', 'LaravelAcademy.org', 30, '/', 'wudy.laravel.cn'); ////设置cookie有效期为30分钟，作用路径为应用根目录，作用域名为laravel.app
+
+    // Illuminate\Http\Response 类中还使用了ResponseTrait，header方法正是该trait提供的
+//    return (new \Illuminate\Http\Response($content, $status))->header('Content-Type', $value);
+
+});
+
+// 上例的助手函数，如果不传参数会返回ResponseFactory - 提供了更丰富的的响应类型，比如视图响应、JSON响应、文件下载等等
+// 试图响应
+Route::get('testResponseView', function (){
+    $value = 'text/html;charset=utf-8';
+    return response()->view('hello', ['message' => 'Hello Laravel'], 200)
+        ->header('Content-Type', $value);
+});
+
+
+// 返回JSON/JSONP
+Route::get('testResponseJson', function (){
+    $data = ['name' => 'wudy.yu', 'age' => 18];
+    $header = ['Content-Type' => 'text/html; charset=UTF-8'];
+    return response()->json($data, 200, $header);
+});
 
 
 

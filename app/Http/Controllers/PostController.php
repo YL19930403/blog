@@ -11,6 +11,7 @@ class PostController extends Controller
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
+     * 访问路由： wudy.laravel.cn:8082/posts
      */
     public function index()
     {
@@ -68,15 +69,20 @@ class PostController extends Controller
         ]);
     }
 
+    public function driver(){
+        echo 'driver';
+    }
+
     /**
      * Display the specified resource.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
+     * 访问路由： wudy.laravel.cn:8082/posts/2
      */
     public function show($id)
     {
-        die('show');
+        echo $id;
     }
 
     /**
@@ -84,6 +90,7 @@ class PostController extends Controller
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
+     * 访问路由： wudy.laravel.cn:8082/posts/2/edit
      */
     public function edit($id)
     {
@@ -113,6 +120,10 @@ class PostController extends Controller
         die('destrory');
     }
 
+    public function transfer($id){
+        echo $id;
+        die('switch');
+    }
 
 
 

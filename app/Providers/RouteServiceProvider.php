@@ -21,7 +21,7 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    //全局约束,如果想要路由参数在全局范围内被给定正则表达式约束
+    //全局约束,如果想要路由参数(id)在全局范围内被给定正则表达式约束
     public function boot()
     {
         Route::pattern('id','[0-9]+');

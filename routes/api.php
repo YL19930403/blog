@@ -79,3 +79,18 @@ Route::put('order/cancel', 'OrderController@cancel');
 //ES
 Route::get('es/index', 'ESController@index');
 Route::get('es/add', 'ESController@add');
+
+
+// 路由前缀 : wudy.laravel.cn:8082/api/admin/postdriver/2?token=wudy.1993yu
+Route::prefix('admin')->group(function (){
+   Route::get('users', function (){
+       return '路由前缀';
+   });
+
+   Route::post('/postdriver/{id}', 'UserController@driver');
+});
+
+// 路由模型绑定: wudy.laravel.cn:8082/api/videos/15?token=wudy.1993yu
+Route::get('/videos/{video}', function (App\Video $video){
+    return $video->name;
+});

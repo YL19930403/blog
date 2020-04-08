@@ -56,6 +56,10 @@ class UserController extends BaseController{
         echo 'wudy';
     }
 
+    public function driver(){
+        echo 'driver';
+    }
+
     //DelayQueue:延时队列   http://wudy.laravel.cn:8088/user22/profile?token=wudy.1993yu
     public function show2(){
         echo  phpinfo();
@@ -63,6 +67,20 @@ class UserController extends BaseController{
     }
 
     public function show(Request $request ,$id){
+
+        // URLs 相关
+        /* --------start--------- */
+//        $url = action('UserController@show', ['id' => $id]);
+//        echo $url; // http://wudy.laravel.cn:8082/user8/1
+
+
+        $path = storage_path('app/photo/test.jpg');
+//        $url = secure_asset('storage/test.jpg');
+        echo $path;
+
+        /* ---------end-------- */
+
+
 
 //        url : wudy.laravel.cn:8082/user8/3?token=wudy.1993yu
 //        return view('user.profile', ['user'=>User::findOrFail($id)]);
